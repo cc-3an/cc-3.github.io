@@ -7,196 +7,74 @@ description: >
     En este laboratorio ustedes van a hacer un par de programas en ensamblador utilizando el Instruction Set de Armv8. Utilizaremos lo aprendido en clase
 ---
 
-#### Antes de Iniciar
+#### Objetivos
+    * Trabajar con dynamic memory allocation.
+    * Practicar con programas de Assembler utilizando MARS.
+    
+#### Setup
+    Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0B5xlmAbvK4yAb3g5TUVYTmdIS1E/view?usp=sharing)
+    
+#### Introducción a Assembler y MARS
+    Los siguientes ejercicios utilizan un simulador de MIPS llamado MARS, que provee una buena interfaz gráfica de debbuging para el código. Pueden correr MARS en sus propias computadoras bajando el archivo jar en el siguiente [link](http://courses.missouristate.edu/kenvollmar/mars/MARS_4_5_Aug2014/Mars4_5.jar). Van a necesitar tener instalado Java en su computadora, o pueden utilizar (si no lo tienen instalado) esto para instalarlo (Únicamente en linux Ubuntu 14.04 LTS):
+    
+```bash
+    # Para ver si ya esta instalado
+    $ java -version
+    java version "1.7.0_91"
+    OpenJDK Runtime Environment (IcedTea 2.6.3) (7u91-2.6.3-0ubuntu0.14.04.1)
+    OpenJDK 64-Bit Server VM (build 24.91-b01, mixed mode)
 
-Ustedes van a estar trabajando con **qemu**, qemu es un emulador de "procesadores" y virtualizador open source, nos va a estar sirviendo en CC3 para poder simular una arquitectura **ARMv8** para que prueben sus programas de ensamblador. En esta ocasión ustedes van a utilizar **Windows** y nosotros ya hemos instalado todo lo necesario para que puedan realizar el lab en su totalidad.para poder instalarlo en su casa podran seguir esta [guia](https://drive.google.com/file/d/0B5xlmAbvK4yAdzBrUExibUpraXc/view?usp=sharing)
-
-Cuando ya hayan hecho login en las computadoras del laboratorio con el usuario de FISICC, van a encontrar una carpeta en el escritorio que se llama **ARMv8_CC3** ustedes tienen que abrir esa carpeta y hacer lo siguiente:
-
-1. Agregar al **PATH** "C:\Archivos de Programa\qemu"
-2. Dentro de la carpeta hay un archivo con extension .PS1 al que ustedes le tienen que dar click derecho y darle en la opción que dice **"Run with PowerShell"**.
-3. Les va a empezar a salir un monton de cosas en el shell y esto significa que está empezando la simulación.
-4. Cuando les pida Usuario y Password tienen que poner Usuario: student, Password: student
-
-Esta maquina virtual solo nos proporciona una terminal por lo que para su comidad le recomendamos trabajar los archivos en su editor de preferencia en windows y copiar los archivos a ubuntu para poder probarlos.
-
-Para poder copiar archivos vamos a utilizar el programa WinSCP el cual lo pueden descargar [aqui](https://winscp.net/download/WinSCP-5.9.4-Portable.zip)
-en su versión portable
-
-Al abrir `WinSCP` les aparecera la siguiente ventana deberan llenar los datos como se describe a continuación
-
-![WinSCP1](/assets/img/labs/WinSCP1.PNG)
-
-* **File Protocol:** SCP
-* **Hostname:** localhost
-* **Port number:** 2222
-* **User name:** student
-* **Password:** student
-
-
-luego le dan click en save, les aparecera una nueva ventana a la que le deben dar click al boton de OK
-despues le dan click al boton que tiene el icono verde que dice login y les aparecera la siguiente ventana ahi deben ingresar el password(student)
-
-![WinSCP2](/assets/img/labs/WinSCP2.PNG)
-
-Luego cuando ya establecio la conexion les muestra la siguiente ventana ![WinSCP3](/assets/img/labs/WinSCP3.PNG)
-
-del lado izquierdo les muestra los archivos que estan en windows, y del lado derecho les muestra los archivos que estan en Ubuntu
-**para transferir un archivo** deben arrastrar de un lado al otro el archivo para que se copie (_si el archivo ya existe les saldra una venta confirmando si lo quieren sobre-escribir tengan cuidado de no copiar en la direccion equivocada_)
-
-
-#### Instrucciones a Utilizar
-
-Instrucciones basicas de ARMv8 que necesitaran para este laboratorio
-
-##### Aritmeticas
-  * `ADD Xd|SP, Xn|SP, Xm`
-  * `SUB Xd|SP, Xn|SP, Xm`
-  * `MUL Xd, Xn, Xm`
-  * `SDIV Xd, Xn, Xm`
-  * `ORR Xd, Xn, Xm`
-  * `AND Xd, Xn, Xm`
-
-##### Comparación y saltos
-  * `CMP Xn, Xm`
-    - Compare (extended register): alias for `SUBS XZR, Xn, Xm{, ashift #imm}`.
-  * `B.cond label` para ver cuales cond existen ver [documentacion de arm](http://infocenter.arm.com/help/index.jsp?topic=/com.arm.doc.den0024a/CHDEEABE.html)
-    - Branch: conditionally jumps to program-relative label if cond is true.
-  * `BL label`
-    - Branch and Link: unconditionally jumps to pc-relative label, writing the address of the next sequential
-instruction to register X30.
-  * `B label`
-    - Branch: unconditionally jumps to pc-relative label.
-  * `ret {Xm}`
-    - Return: jumps to register Xm, with a hint to the CPU that this is a subroutine return. An assembler shall
-default to register X30 if Xm is omitted.
-
-##### Manejo de memoria
-  * LDR Xt, addr
-    - Load Register (extended): loads a doubleword from memory addressed by addr to Xt.
-  * LDRB Wt, addr
-    - Load Byte: loads a byte from memory addressed by addr, then zero-extends it to Wt.
-  * STR Xt, addr
-    - Store Register (extended): stores doubleword from Xt to memory addressed by addr
-
-
-  __NOTA__: addr debe ser en el formato `[Xn|SP, #offset ]`, ejemplo si queremos cargar el primer caracter de un string al que apunta x19 lo hacemos con `LDRB w9, [x19, #0]`
-
-
-Otra cosa importante es que ustedes pueden refrescar un poco lo visto en clase con los ejemplos que se dieron de ensamblador (que mejor que ver ejemplos no? xD) todo eso lo pueden encontrar en el repositorio de **GitHub** de CC3 llamado basicARM
-
-[https://github.com/cc-3/basicARM](https://github.com/cc-3/basicARM)
-
-
-#### GitHub Classroom
-
-Vamos a seguir utilizando github classroom, por lo que su repositorio se encuentra en el siguiente [link](https://classroom.github.com/assignment-invitations/8e2bac83b94fa9af3c62f3caadc8697b) y aqui tienen que subir todos sus archivos terminados.
-
-#### Ejercicio 1: Calculadora
-
-Para el primer ejercicio ustedes van a realizar una calculadura básica en lenguaje ensamblador que va a tener las siguientes operaciones:
-
-1. "+": Suma
-2. "-": Resta
-3. "* ": Multiplicación
-4. "/": División
-5. "&": And
-6. "\|": Or
-7. "^": Xor
-8. "<": Shift left logico
-9. ">": Shift right logico
-
-En este caso todas las operaciones las tienen que implementar como funciones y dado que estas son "leaf procedures", no es necesario que guarden el x30, pero si lo tienen que hacer en main ya que esta si manda a llamar a las demas funciones y el valor se puede sobreescribir. Recuerden utilizar correctamente los registros (el convenio visto en clase).
-
-**NOTA: Ustedes tienen que cargar en x0 el operando numero 1 y en x1 el operando numero 2 y devolver el resultado en x0**
-
-![Convenio Arm](/assets/img/labs/convenio_arm.jpeg)
-
-Su archivo se tiene que llamar **ejercicio1.s** (tiene que estar en la carpeta de su repositorio) y para compilarlo tienen que utilizar **gcc**
-
-```sh
-# Si X0=2, X1=2, y es la operacion suma
-$ gcc -o calculadora ejercicio1.s
-$ ./calculadora
-$ echo $? # esto para obtener el resultado
-4
+    # Si no aparece lo de arriba
+    # Esto instala el java runtime environment y el compilador de java
+    $ sudo apt-get install openjdk-7-jdk
 ```
 
-Cuando tengan terminado el ejercicio 1 recuerden que tienen que subirlo a su repositorio
+Pueden correr MARS utilizando lo siguiente:
 
-```sh
-$ git add ejercicio1.s
-$ git commit -m "ejercicio 1 terminado"
-$ git push -u origin master
+```
+    $ java -jar Mars4_5.jar
 ```
 
-#### Ejercicio 2: Calculadora (Printf)
+**Cosas básicas de Assembler:**
+* Los programas de Assembler van en un archivo de texto con extensión (.s)
+* Los programas deberían de llevar un label “main:” (similar a la función main() en C)
+* Los programas deberían de terminar con “addi $v0, $zero, 10” seguido de un “syscall”.
+* Las labels terminan con dos puntos (:)
+* Los comentarios empiezan con numeral (#)
+* No pueden poner mas de una instrucción por linea
 
-En el ejercicio anterior tuvimos que utilizar `echo $?` para poder obtener el resultado, ahora lo que tienen que hacer es modificar el ejercicio 1 para que utilice **printf** y asi desplegar el resultado de la operación de una vez, como en el ejemplo **basicWhile_printf.s** que esta en el repo con los ejemplos vistos en clase.
+#### Ejercicio 2: Acostumbrándose a usar MARS
+**Para empezar:**
+* Corran MARS (Como se les enseño arriba)
+* Carguen lab4_ex2.s usando File-->Open
+* Vean y editen el código en el tab “Edit”. Noten que el editor tiene highlighting y sugerencias de auto-completado
+* Cuando estén listos, ensamblen su codigo usando Run-->Assemble (o presionando F3)
+* Esto automáticamente los va a llevar al tab “Execute”, que es donde corren y pueden hacer debug a su programa
+* Avancen en su programa linea por linea utilizando Run-->Step (o presionando F7)
+* Deberían de tomarse el tiempo para familiarizarse con todo (como los atajos de teclado)
 
-Su calculadora tiene que desplegar el mensaje **El resultado de la operacion es:** seguido del resultado.
+Para este ejercicio, van a calcular la serie de Fibonacci usando fib[0] = 0; fib[1] = 1; fib[n] = fib[n-1] + fib[n-2]
+**Utilizando los siguientes pasos y guardando las respuestas a las preguntas. El menu de ayuda les puede servir (F1).**
 
-Su archivo se tiene que llamar **ejercicio2.s** nuevamente para compilar hay que utilizar gcc
+* ¿Qué significan las directivas .data, .word y .text? (Es decir, que ponen en cada sección)
+* ¿Cómo ponen un breakpoint en MARS? Pongan un breakpoint en la linea 14 y córranlo. ¿Cuál es dirección de la instrucción? ¿La linea 14 se ejecuta o no?
+* En el breakpoint, ¿Cómo continuan ejecutando su código? Corran el código completo
+* Encuentren la ventana “RUN I/O”. ¿Qué numero el programa saca? ¿Qué numero (n) de Fibonacci es ?
+* ¿En que dirección n es guardado en memoria? Prueben encontrar esto buscando en el Data Segment y Mirando el machine code (Text Segment)
+* Sin usar el editor, hagan que el programa calcule el 13° numero de Fibonacci, manualmente modificando la locación en memoria antes de ejecutarlo.
+* Lineas 19 y 21 usan la instrucción syscall. ¿Qué es y cómo se usa?
 
-```sh
-# Si X0=2, X1=2, y es la operacion suma
-$ gcc -o calculadora ejercicio2.s
-$ ./calculadora
-$ El resultado de la operacion es: 4
+#### Ejercicio 3: Un programa corto en MIPS
+Escriban un pedazo de código desde 0 que, dado un valor en $s0 o $s1, cumpla con lo siguiente:
+```
+    $t0 = $s0
+    $t1 = $s1
+    $t2 = $t0 + $t1
+    $t3 = $t1 + $t2
+    ...
+    $t7 = $t5 + $t6
 ```
 
-Cuando tengan terminado el ejercicio 2 tambien lo tienen que subir al repositorio
+En otras palabras, para cada registro desde $t2 a $t7, guarden la suma de los 2 previos $t# registros. Los registros $s0 y $s1 contienen los valores iniciales. Pongan los valores iniciales de $s0 y $s1 manualmente usando MARS en vez de utilizando código. Finalmente, hagan que su código al final imprima el valor de $t7 como un entero (Hint: syscall) 
 
-```sh
-$ git add ejercicio2.s
-$ git commit -m "ejercicio 2 terminado"
-$ git push -u origin master
-```
-#### Ejercicio 3: Linea de comandos
-
-Ahora vamos a re-utilizar la calculadora que ya tiene printf (del ejercicio anterior) y la vamos a extender para que en vez de hacer un set a los registros asi directamente podamos mandarlo por la linea de comandos y tambien ver que operacion es la que quiere el usuario de la siguiente manera:
-
-```sh
-$ gcc -o calculadora ejercicio3.s
-$ ./calculadora 2 "+" 2
-$ El resultado de la operacion es: 4
-```
-
-**HINT: les va a ser util "ldrb" a la hora de ver que operador es el utilizado**
-
-Vean que para usar la calculadora se manda la operacion por la linea de comandos, para obtener los argumentos con los que fue llamado el programa en la linea de comandos
-en c nuestro main tendria
-`int main( int argc, char* argv[] )`
-entonces en nuestro main de ensamblador tendremos en `X0` el argc y en el `X1` tendremos el argv[] y para cargar cada posición de argv lo hacemos con `LDR X9, [X1, #offset]` _el offset es en múltiplos de 8_, algo importante es que comenzariamos en el offset 8 ya que en 0 tenemos el nombre del archivo.
-
-Algo que tienen que considerar es que lo que ustedes reciben en la linea de comandos es un string y para el caso de los operandos lo tienen que convertir a un valor entero por lo que van a necesitar utilizar la funcion atoi de C para más información sobre esto aqui hay un [link](https://www.tutorialspoint.com/c_standard_library/c_function_atoi.htm) que muestra para que funciona esta funcion.
-
-Cuando tengan terminado el ejercicio 3 tambien lo tienen que subir al repositorio
-
-```sh
-$ git add ejercicio3s.s
-$ git commit -m "ejercicio 3 terminado"
-$ git push -u origin master
-```
-
-#### Ejercicio 4: Factorial Recursivo y Printf
-
-Para este ejercicio lo que tienen que hacer es que dado un numero en la linea de comandos imprima cual es el factorial de ese numero
-
-Su archivo se debe llamar **ejercicio4.s**
-
-y para compilarlo nuevamente
-
-```sh
-$ gcc -o factorial ejercicio4.s
-$ ./factorial 5
-$ 120
-```
-
-Cuando tengan terminado el ejercicio 4 tambien lo tienen que subir al repositorio
-
-```sh
-$ git add ejercicio4.s
-$ git commit -m "ejercicio 4 terminado"
-$ git push -u origin master
-```
+**Guarden su código en un archivo llamado lab4_ex3.s.** No se olviden de usar una label “main:” y terminen su programa con “syscall 10”
