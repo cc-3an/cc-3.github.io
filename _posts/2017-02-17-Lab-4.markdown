@@ -8,14 +8,14 @@ description: >
 ---
 
 #### Objetivos
-    * Trabajar con dynamic memory allocation.
-    * Practicar con programas de Assembler utilizando MARS.
+* Trabajar con dynamic memory allocation.
+* Practicar con programas de Assembler utilizando MARS.
     
 #### Setup
-    Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0B5xlmAbvK4yAb3g5TUVYTmdIS1E/view?usp=sharing)
+Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0B5xlmAbvK4yAb3g5TUVYTmdIS1E/view?usp=sharing)
     
 #### Introducción a Assembler y MARS
-    Los siguientes ejercicios utilizan un simulador de MIPS llamado MARS, que provee una buena interfaz gráfica de debbuging para el código. Pueden correr MARS en sus propias computadoras bajando el archivo jar en el siguiente [link](http://courses.missouristate.edu/kenvollmar/mars/MARS_4_5_Aug2014/Mars4_5.jar). Van a necesitar tener instalado Java en su computadora, o pueden utilizar (si no lo tienen instalado) esto para instalarlo (Únicamente en linux Ubuntu 14.04 LTS):
+Los siguientes ejercicios utilizan un simulador de MIPS llamado MARS, que provee una buena interfaz gráfica de debbuging para el código. Pueden correr MARS en sus propias computadoras bajando el archivo jar en el siguiente [link](http://courses.missouristate.edu/kenvollmar/mars/MARS_4_5_Aug2014/Mars4_5.jar). Van a necesitar tener instalado Java en su computadora, o pueden utilizar (si no lo tienen instalado) esto para instalarlo (Únicamente en linux Ubuntu 14.04 LTS):
     
 ```bash
     # Para ver si ya esta instalado
