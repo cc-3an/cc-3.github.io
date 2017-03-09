@@ -12,7 +12,7 @@ description: >
 * Manipular punteros en MIPS.
   
 #### Setup
-Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https:placeholder)
+Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0B5xlmAbvK4yAZFFwdHZDWGk4UmM/view)
     
 #### Ejercicio 1
 Este ejercicio usa el archivo listmanips.s
