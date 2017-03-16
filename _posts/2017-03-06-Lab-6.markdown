@@ -33,6 +33,8 @@ Entregable: Un documento .txt con la respuesta a sus preguntas. Las modificacion
 Lea, entienda y complete el archivo asm_reg.s
 Este archivo contiene dos funciones: asm_reg: que dado un nombre de registro ($a0 por ejemplo), obtiene cual es el número que corresponde a ese registro (4 en este ejemplo); atoi: que convierte un ascii que representa un número a su representación como int.
 
+*La función asm_reg incumple parte del convenio visto en clase: El argumento se le manda en $s0. Hacemos esto porque asm_reg será parte del proyecto*
+
 Agregue la siguiente funcionalidad:
 * Completar el código para que funcione para todos los registros (solo funciona con $ax, $vx y $0).
 * Imprimir un mensaje que indique cuando se ingresó un dato incorrecto.
