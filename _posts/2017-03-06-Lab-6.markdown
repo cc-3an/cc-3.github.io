@@ -1,0 +1,43 @@
+---
+layout: post
+title:  "Laboratorio 6"
+date:   2017-03-16
+category: lab
+description: >
+    Codificación de instrucciones en MIPS
+---
+
+#### Objetivos
+* Ganar más práctica en llamadas a funciones en MIPS.
+* Trabajar con algunas funciones que serán importantes para su segundo proyecto.
+  
+#### Setup
+Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0Byz-R0iYOs4fbkl2UW94Z0xGeUk/view)
+    
+#### Ejercicio 1
+
+Lea, entienda y modifique el archivo strcmp.s
+Responda las siguientes preguntas
+
+* Cuál es el caracter 10 en ASCII? Cómo lo podemos relacionar con el caracter espacio en MIPS? (Qué diferencias o similitudes tienen, respecto a cómo se manejan por el ensamblador)
+* La función strcmp sufre de varias limitantes, qué pasa si un espacio o el caracter 10 va en $a0?
+* Qué pasa si un espacio o el caracter 10 va en $a1?
+* Qué pasa si el string apuntado por $a0 es más largo que el de $a1?
+* Qué pasa si el string apuntado por $a1 es más largo que el de $a0?
+* Para que sirve el syscall 10?
+
+Entregable: Un documento .txt con la respuesta a sus preguntas. Las modificaciones que le haga al .s no importan, son solo para lograr responder las preguntas.
+
+#### Ejercicio 2
+
+Lea, entienda y complete el archivo asm_reg.s
+Este archivo contiene dos funciones: asm_reg: que dado un nombre de registro ($a0 por ejemplo), obtiene cual es el número que corresponde a ese registro (4 en este ejemplo); atoi: que convierte un ascii que representa un número a su representación como int.
+
+Agregue la siguiente funcionalidad:
+* Completar el código para que funcione para todos los registros (solo funciona con $ax, $vx y $0).
+* Imprimir un mensaje que indique cuando se ingresó un dato incorrecto.
+
+Entregable: El archivo asm_reg.s modificado, dejen incluido el main o código adicional que usaron para probar lo que hicieron.
+
+#### Modalidad de entrega
+Entregar dentro de un .zip, vía GES, en la fecha indicada.
