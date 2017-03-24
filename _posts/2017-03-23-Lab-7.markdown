@@ -1,0 +1,33 @@
+---
+layout: post
+title:  "Laboratorio 7"
+date:   2017-03-23
+category: lab
+description: >
+    Tabla de símbolos en MIPS.
+---
+
+#### Objetivos
+* Practicar comparaciones y uso de estructuras de datos en MIPS.
+* Construir la tabla de símbolos que utilizarán en su proyecto.
+  
+#### Setup
+Descarguen los archivos necesarios para este laboratorio en el siguiente [link](https://drive.google.com/file/d/0Byz-R0iYOs4fWXV3X09iV0ZuVDA/view)
+
+#### Instrucciones
+Para este laboratorio debe implementar una tabla de símbolos, que más adelante utilizará en su ensamblador. La tabla de símbolos es una estructura de datos en la cual se almacenaran los nombres de las etiquetas (tanto las de funciones como de datos) y la dirección que cada una de estas etiquetas tiene relacionada.
+
+Una tabla de símbolos entonces relaciona una cadena de caracteres con una dirección, la estructura de datos que usted implemente debe reflejar esto.
+
+La tabla de símbolos necesita tener estas dos funciones básicas:
+* Agregar un elemento: Su tabla de símbolos debe tener una función que reciba como argumentos una cadena de caracteres y una dirección. Debe guardar estos dos datos de la forma que prefiera.
+* Buscar un elemento: Esta función debe recibir como argumento una cadena de caracteres y buscarla entre los datos que ya guardó previamente. Si la cadena se encuentra, devolverá la dirección que esta tiene asignada; si no se encuentra, devuelva -1.
+
+El archivo base que se le provee le ayuda (o sugiere) cómo probar estas funcionalidades.
+
+#### Hints
+* Como esta tabla formará parte de su proyecto, puede usar funciones que están incluídas allí para ayudarse (comparación de strings por ejemplo).
+* Ustede decide como guardar las cadenas de caracteres. Para simplificar, puede indicar un largo máximo que estas puedan tener.
+
+#### Modalidad de entrega
+Entregar dentro de un .zip, vía GES, en la fecha indicada.
