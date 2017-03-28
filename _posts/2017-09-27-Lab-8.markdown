@@ -30,7 +30,7 @@ Así como los programas en C pueden contener funciones de ayuda, un circuito pue
 4. Volver a su circuito principal haciendo doble clic "main" en el selector de circuito en la parte izquierda de la pantalla. Ahora se mostrará la ventana original (en blanco), pero su circuito NAND se ha almacenado.
 5. Ahora, solo haga clic en la palabra "NAND" en la lista. Esto le dirá Logisim que desea añadir su circuito "NAND" en el circuito "main".
 6. Trate de colocar su circuito NAND en el circuito "main". Si lo hizo correctamente, debería ver una puerta con 2 pines de entrada a la izquierda y un pin de salida a la derecha. Trate de añadir pines de entrada y pines de salida hasta estos y ver si funciona como se esperaba.
-7. Repita estos pasos para crear varios más subcircuitos: NOR, XOR, MUX 2 a 1. No utilice ningúna puertas que no sean AND, OR y NOT. Sin embargo, una vez que se ha construido un subcircuito, es posible utilizarlo para construir otros.
+7. Repita estos pasos para crear varios más subcircuitos: NOR, XOR, MUX 2 a 1, MUX 4 a 1. No utilice ningúna puertas que no sean AND, OR y NOT. Sin embargo, una vez que se ha construido un subcircuito, es posible utilizarlo para construir otros.
 
 Sugerencia: Trate de escribir una tabla de verdad y mapa de Karnaugh para cada circuito.
 
