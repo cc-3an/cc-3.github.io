@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "Laboratorio 9"
+date:   2017-04-20
+category: lab
+description: >
+    Construcción de register file y ALU en Logisim, que serán usados como parte del proyecto.
+---
+### Componentes
+#### Túneles
+Ref: http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/tunnel.html
+
+Un túnel permite dibujar un "cable invisible" para unir dos puntos. Los túneles se identifican por etiquetas (case-sentitive). Por ejemplo el siguiente diagrama:
+
+![figura1](/assets/img/labs/tunnels1.png)
+
+tiene el siguiente efecto
+
+![figura1](/assets/img/labs/tunnels2.png)
+
+Debe tener cuidado en cuanto a como y hacia donde conecta cada túner, por ejemplo:
+
+![figura1](/assets/img/labs/tunnels3.png)
+
+tiene el efecto que se muestra en la imagen de abajo.
+
+![figura1](/assets/img/labs/tunnels4.png)
+
+#### Extensores
+Ref: http://www.cburch.com/logisim/docs/2.6.0/en/libs/base/extender.html
+
+Al cambiar en "ancho" de un alambre, se debe utilizar un bit extender para mayor claridad
+
+![figura1](/assets/img/labs/extend1.png)
+
+Mientras que los siguiente son mucho más simples, más fácil de leer y menos propenso a errores:
+
+![figura1](/assets/img/labs/extend2.png)
+
+### Ejercicios
+Descargue los archivos necesarios del siguiente <a href="https://drive.google.com/file/d/0Byz-R0iYOs4fUFlSNl9ybEU5VG8/view?usp=sharing">link.</a>
+
+#### Ejercicio 1: ALU
+En este ejercicio usted implementará un ALU de 32 bits. Un ALU es un bloque de construcción fundamental de una CPU que realiza operaciones lógicas y aritmética de enteros.
+
+Todas las funciones a implementar deben ser entre registros de 32 bits, es decir dos registros de 32 bits como entrada y como salida uno de 32 bits.
+
+La función seleccionada se determina por el valor de la señal de control, como se indica a continuación:
+
+| Control | Operación              |
+|---------|------------------------|
+| 000     | Shift Left Logical     |
+| 001     | Shift Right Logical    |
+| 010     | Shift Right Arithmetic |
+| 011     | Rotate Left            |
+| 100     | Rotate Right           |
+| 101     | And                    |
+| 110     | Or                     |
+| 111     | Exclusive Or           |
+
+#### Ejercicio 2: Register File
+Ref: http://www.cburch.com/logisim/docs/2.6.0/en/libs/mem/register.html
+
+Ref: http://www.cburch.com/logisim/docs/2.6.0/en/libs/plexers/demux.html
+
+Recuerde que un register file es un conjunto de registros en una CPU. Utilizamos el register file para leer o escribir a partir de los registros seleccionados.
+
+Este ejercicio le ayudará a enternder como funciona un register file para su proyecto 4 y le dará más práctica en Logisim.
+
+Su register file contendrá 4 registros de 8 bits. Al igual que en un procesador MIPS, el registro 0 debe tener "siempre" el valor de 0 por lo que no debe ser posible escribir cualquier valor en él.
+
+Las entradas de su circuito son:
+
+    RS- source register.
+    RT - target register
+    RD - destination register
+    RD_WRITE_VALUE - valor a escribir en RD.
+    RD_WRITE_ENABLE -  sólo se escribe el contenido de RD_WRITE_VALUE en RD si este bit es 1.
+    CLK - Pulso de reloj
+
+Las salidas de su register file deben ser:
+
+    RS_READ_VALUE - el valor leído del registro RS
+    RT_READ_VALUE -el valor leído del registro RT
+    REG_{0,1,2,3}_VALUE - Valores actuales de todos sus registros.  Un register file normal no incluiría esto, pero es muy útil para debuging y para comprobar que su circuito funciona correctamente.
