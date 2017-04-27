@@ -20,7 +20,7 @@ El Program Counter (desde ahora PC), es un registro con capacidad de autoincreme
 
 Debido a que solo tendremos direcciones de 24 bits, usaremos solo los dígitos menos significativos.
 
-#### Ejercicio 3: 
+#### Ejercicio 3: InstructionDecoderPt1
 Esta es la parte más importante del laboratorio.
 
 Deben leer las indicaciones del proyecto e implementar un circuito que, dada la instrucción que reciben de input, encienda uno (y únicamente uno) de los bits de salida R, I o J. Cada uno de estos bits representa un tipo de codificación, y esto les ayudará a determinar como deben partir las instrucciones.
